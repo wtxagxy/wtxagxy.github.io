@@ -29,7 +29,7 @@
 
 
 
-  <title> Hello World // 王天星的blog </title>
+  <title> 五子棋项目总结 // 王天星的blog </title>
 </head>
 
 <body>
@@ -108,7 +108,7 @@
           
           
             
-              Hello World
+              五子棋项目总结
             
           
         </h1>
@@ -116,7 +116,7 @@
 
       <div class="post-meta">
         <span class="post-time">
-          发表于 2015-04-25
+          发表于 2016-07-15
         </span>
 
         
@@ -133,14 +133,87 @@
       
 
       
-        <h1 id="Hello_World">Hello World</h1><h2 id="Quick_Start">Quick Start</h2><h3 id="Create_a_new_post">Create a new post</h3><figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$ </span>hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run_server">Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate_static_files">Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy_to_remote_sites">Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
+        <hr>
+<table>
+<thead>
+<tr>
+<th>日期</th>
+<th style="text-align:center">版本</th>
+<th style="text-align:center">说明</th>
+<th style="text-align:center">作者</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2016-07-06</td>
+<td style="text-align:center">1.0</td>
+<td style="text-align:center">创建</td>
+<td style="text-align:center">王天星</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<p>[TOC]</p>
+<h1 id="项目简介">项目简介</h1><p>&#160; &#160; &#160; &#160;五子棋有着容易上手，老少皆宜等特点，而且趣味横生，引人入胜；经常玩五子棋不仅能增强思维能力，提高智力，而且富含哲理，有助于修身养性, 五子棋有着广泛的人群基础，加上入门门槛低，很适合做成手机。目前手机五子棋游戏种类比较多，但出彩的产品比较少，本游戏策划案参考了这些产品，分析了其优点和缺点，并结合JJ平台本身的一些特点。</p>
+<h1 id="本期项目实现">本期项目实现</h1><ul>
+<li><h3 id="实现功能">实现功能</h3><ul>
+<li><h5 id="落子按住时点击位置增加十字瞄准线">落子按住时点击位置增加十字瞄准线</h5></li>
+<li><h5 id="落子长按时在屏幕上方增加放大框以帮助更好的确定落子的位置">落子长按时在屏幕上方增加放大框以帮助更好的确定落子的位置</h5></li>
+<li><h5 id="增加游戏玩法《限步闯关》">增加游戏玩法《限步闯关》</h5></li>
+<li><h5 id="增加游戏玩法《人人对战》">增加游戏玩法《人人对战》</h5></li>
+<li><h5 id="实现功能开局库">实现功能开局库</h5></li>
+<li><h5 id="实现功能读取Excel表格关卡数据转换为Json数据">实现功能读取Excel表格关卡数据转换为Json数据</h5></li>
+<li><h5 id="界面整体风格改变">界面整体风格改变</h5></li>
+</ul>
+</li>
+<li><h3 id="实现难点">实现难点</h3><ul>
+<li><h5 id="放大镜">放大镜</h5><p>&#160; &#160; &#160; &#160;放大镜功能是为了协助用户看清楚落子的位置，具体设计是当点击棋盘时，在屏幕左上方会出现一个5X5棋盘格子大小的弹窗，实现思路是设置一个正方形的剪裁区域将需要显示的棋盘内容放入到剪裁区域内，刚开始使用ClippingNode来实现，过程当中出现，内容在刷新的时候有可能导致剪裁区域失效，内容显示不正确，百度搜索后发现，有很多人提出在cocos2dx-2.x的版本上是有这个问题的，ClippingNode的visit函数实现里</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="number">231.</span>     <span class="comment">//glClear(GL_STENCIL_BUFFER_BIT);</span></span><br></pre></td></tr></table></figure>
+<p>清除模板缓冲区这句话给注掉了，解注之后，功能正常。当一条路走不通的时候我们可以走另一条路，使用CCClippingRegionNode来实现，CCClippingRegionNode的实现原理是：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">CCDirector::sharedDirector()-&gt;getOpenGLView()-&gt;setScissorInPoints(x, y, w, h);</span><br></pre></td></tr></table></figure>
+<p>剪裁区域，指定一个窗口大小，即可实现指定区域的剪裁。</p>
+</li>
+<li><h5 id="开局库">开局库</h5><p>&#160; &#160; &#160; &#160;AI系统走法相对单一，为了避免AI每次都用同样的招数，让玩家体验到AI的随即以及多样性，需要AI走棋时参考开局库信息。开局库难点有两点：</p>
+<ul>
+<li><h6 id="录入工具">录入工具</h6>&#160; &#160; &#160; &#160;为了方便产品录入开局库信息，需要开发一款开局库录入工具，大多数人使用的的操作系统为windows，思考后决定采用C#开发开局库录入工具，开局库使用了pictureBox控件展示棋盘，用户可以点击棋盘添加棋子，棋子采用树形结构保存数据，当用户选中或添加一颗棋子时，棋子向上层遍历父节点到根节点，向下层遍历一层子节点，来展示局面信息，录入完毕后点击保存可将树形结构保存为json数据。</li>
+<li><h6 id="客户端实现">客户端实现</h6>&#160; &#160; &#160; &#160;客户端拿到开局库的数据之后需要做对称性添加，即假设黑方在7,7的位置上，白色棋子的对应招数在6,7的位置，客户端需要算出7,6、8,7、7,9的位置，这只需要将6,7对应7,7的位置做3次90度旋转计算出。AI引擎需要进行适配，项目一期的时候是玩家走子后，将走子信息发送给AI引擎，引擎计算出结果，反馈给客户端，客户端展示，玩家每走一步都是这个流程，出现开局库后需要玩家走子后，首先匹配开局库，如果匹配上开局库，从开局库选出一个走法，反馈给客户端，如果开局库没有找到相应走法则发送局面信息给AI引擎，引擎计算出反馈信息。</li>
+</ul>
+</li>
+<li><h5 id="Excel转换json工具">Excel转换json工具</h5><p>&#160; &#160; &#160; &#160;新加入的限步闯关玩法是让玩家挑战五子棋残局，挑战完成后可进入下一关，总共是100关，100关的数据量比较庞大，那么需要关卡数据的录入，这项录入工作需要先将数据录入到Excel，然后再使用python将Excel转换成Json。python真的是个很方便的工具，简单的几句话即可实现批量化的操作，python 操作Excel的模块有两个xlrd、xlwt，前者是读取，后者是写入，这次只用到了读取功能，读取到信息之后使用json模块转化成json数据。</p>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="测试">测试</h1><p>&#160; &#160; &#160; &#160;本期bug供提54个，指派给我的是42个，其中有两个Bug非常难解决，颇具代表性</p>
+<ul>
+<li><h3 id="Bug1[#18131]">Bug1[#18131]</h3><ul>
+<li><h6 id="描述:">描述:</h6>&#160; &#160; &#160; &#160;限步闯关多次操作提示和悔棋按钮（在10次以上）会出现游戏闪退</li>
+<li><h6 id="解决:">解决:</h6>&#160; &#160; &#160; &#160;这个现象必须操作很多次以上才会出现，刚开始抓lua_error.log始终无法找到有效信息，后来抓取android.log的时候发现了：<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">E/dalvikvm(<span class="number">4223</span>): <span class="function">JNI <span class="title">ERROR</span> <span class="params">(app bug)</span>: local reference table <span class="title">overflow</span> <span class="params">(max=512)</span></span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>百度后发现这是JNI局部引用表内存泄露导致的，发现AI引擎代码里</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">jenv-&gt;CallStaticVoidMethod(g_class, g_methodId, jenv-&gt;NewStringUTF(str));</span><br></pre></td></tr></table></figure>
+<p>AI引擎需要将反馈信息传递给lua宿主，但是中间需要有个中介java，传递给java需要将c_str转化成java_str，就需要调用jenv-&gt;NewStringUTF();，通过android.log得知当局部引用表超过512个的时候就会报出JNI ERROR，这就是闪退的原因，明白原因就好处理，既然是引用表超出上限导致的，那么我们只需要调用jenv-&gt;DeleteLocalRef (java_str);就可以解决问题了 。</p>
+</li>
+<li><h3 id="Bug2[#18148]">Bug2[#18148]</h3><ul>
+<li><h6 id="描述:-1">描述:</h6>&#160; &#160; &#160; &#160;个别Android机型在弱网，或者网络切换的时候会出现AI不行棋的现象。</li>
+<li><h6 id="解决:-1">解决:</h6>&#160; &#160; &#160; &#160;这个问题刚开始解决的时候就陷入了误区，开始认为是lua代码的问题，因为五子棋和象棋项目一样使用到了AI引擎库，象棋没有问题而五子棋有问题，于是改成了和象棋一样的AI使用方式，修改之后依然会出现AI不行棋bug，这条路行不通。在一次查看log的时候发现不走子的时候AI在发送反馈信息，但是lua层始终收不到，原因是lua的callback句柄会失效，不知是什么情况会导致插件的callback失效，带着疑问询问了插件的开发人员徐基慧，经过徐基慧查证发现因某些Android机型在网络重连的情况下会重新调用App的onResume()函数，而大厅在onResume()函数里对插件有一些初始化操作导致了五子棋插件的callback失效，需要修改大厅的java层代码才能解决bug，但是我们目前线上用户有很大一部分使用的都是旧的Apk有可能不会升级成新Apk，这样是没办法有效解决这个bug。后来在和我的领导滔哥讨论这个bug的时候，滔哥给了我一个思路，旧的AI消息的反馈机制是发送指令给AI，AI开始运转，当AI计算出结果后通知lua的callback，我们能不能让AI计算出结果后保存在一个队列里，然后lua层在gameLoop里调用查询反馈信息，我认为可行，动手解决，但是依然出现Bug，大厅第一次运行正常，第二次到以后的运行会出现反馈结果始终为true的现象，将问题反馈给徐基慧，徐基慧表示这是已知的问题会在大厅的11期SDK升级中解决这个问题，至此问题得到了解决。</li>
+</ul>
+</li>
+</ul>
+<h1 id="时间周期">时间周期</h1><ul>
+<li><h4 id="计划完成时间：3月31日———-5月20日">计划完成时间：3月31日———-5月20日</h4></li>
+<li><h4 id="体验时间：&#160;_&#160;_&#160;_&#160;5月21日———-5月27日">体验时间：&#160; &#160; &#160; &#160;5月21日———-5月27日</h4></li>
+<li><h4 id="第一次顺延：_&#160;_5月27日———6月06日(原因：产品体验&#160;+&#160;修改)">第一次顺延：  &#160; 5月27日———6月06日(原因：产品体验&#160;+&#160;修改)</h4></li>
+<li><h4 id="第二次顺延：_&#160;_6月06日———6月14日(原因：产品需求变更)">第二次顺延：  &#160; 6月06日———6月14日(原因：产品需求变更)</h4></li>
+<li><h4 id="第三次顺延：_&#160;_6月16日———6月21日(原因：产品体验&#160;+&#160;修改)">第三次顺延：  &#160; 6月16日———6月21日(原因：产品体验&#160;+&#160;修改)</h4></li>
+<li><h4 id="测试：&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;6月22日———7月05日">测试：&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;6月22日———7月05日</h4></li>
+<li><h4 id="上线：&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;7月07日上午10:30分">上线：&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;7月07日上午10:30分</h4></li>
+</ul>
+<h1 id="总结">总结</h1><ul>
+<li>这次项目开发时间周期过长，原因在于多次的产品体验加上产品需求变更，导致期间出现了3次顺延，在以后的开发过程中项目进入到产品体验阶段，不应有大的需求变更。</li>
+<li>在测试过程当中遇到的两个Bug解决思路上刚开始都进入了误区，都是偶现Bug，没有有效利用log文件，导致解决的时候出现很大的障碍，以后在遇到类似问题时应首先找到有效重现步骤，并从log文件定位到问题，如果无法找到有效重现步骤，可以在关键代码处打log，然后重现bug，通过观察log文件定位到问题。</li>
+</ul>
 
       
     </div>
@@ -152,11 +225,11 @@
         <div class="post-nav">
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2015/04/25/测试一下/">测试一下</a>
-            
           </div>
 
           <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/07/15/hello-world/">Hello World</a>
             
           </div>
         </div>
@@ -251,7 +324,7 @@
           <div class="post-toc">
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Hello_World"><span class="nav-number">1.</span> <span class="nav-text">Hello World</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Quick_Start"><span class="nav-number">1.1.</span> <span class="nav-text">Quick Start</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Create_a_new_post"><span class="nav-number">1.1.1.</span> <span class="nav-text">Create a new post</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Run_server"><span class="nav-number">1.1.2.</span> <span class="nav-text">Run server</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Generate_static_files"><span class="nav-number">1.1.3.</span> <span class="nav-text">Generate static files</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Deploy_to_remote_sites"><span class="nav-number">1.1.4.</span> <span class="nav-text">Deploy to remote sites</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#项目简介"><span class="nav-number">1.</span> <span class="nav-text">项目简介</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#本期项目实现"><span class="nav-number">2.</span> <span class="nav-text">本期项目实现</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#实现功能"><span class="nav-number">2.0.1.</span> <span class="nav-text">实现功能</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#落子按住时点击位置增加十字瞄准线"><span class="nav-number">2.0.1.0.1.</span> <span class="nav-text">落子按住时点击位置增加十字瞄准线</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#落子长按时在屏幕上方增加放大框以帮助更好的确定落子的位置"><span class="nav-number">2.0.1.0.2.</span> <span class="nav-text">落子长按时在屏幕上方增加放大框以帮助更好的确定落子的位置</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#增加游戏玩法《限步闯关》"><span class="nav-number">2.0.1.0.3.</span> <span class="nav-text">增加游戏玩法《限步闯关》</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#增加游戏玩法《人人对战》"><span class="nav-number">2.0.1.0.4.</span> <span class="nav-text">增加游戏玩法《人人对战》</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#实现功能开局库"><span class="nav-number">2.0.1.0.5.</span> <span class="nav-text">实现功能开局库</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#实现功能读取Excel表格关卡数据转换为Json数据"><span class="nav-number">2.0.1.0.6.</span> <span class="nav-text">实现功能读取Excel表格关卡数据转换为Json数据</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#界面整体风格改变"><span class="nav-number">2.0.1.0.7.</span> <span class="nav-text">界面整体风格改变</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实现难点"><span class="nav-number">2.0.2.</span> <span class="nav-text">实现难点</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#放大镜"><span class="nav-number">2.0.2.0.1.</span> <span class="nav-text">放大镜</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#开局库"><span class="nav-number">2.0.2.0.2.</span> <span class="nav-text">开局库</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#录入工具"><span class="nav-number">2.0.2.0.2.1.</span> <span class="nav-text">录入工具</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#客户端实现"><span class="nav-number">2.0.2.0.2.2.</span> <span class="nav-text">客户端实现</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Excel转换json工具"><span class="nav-number">2.0.2.0.3.</span> <span class="nav-text">Excel转换json工具</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#测试"><span class="nav-number">3.</span> <span class="nav-text">测试</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Bug1[#18131]"><span class="nav-number">3.0.1.</span> <span class="nav-text">Bug1[#18131]</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#描述:"><span class="nav-number">3.0.1.0.0.1.</span> <span class="nav-text">描述:</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#解决:"><span class="nav-number">3.0.1.0.0.2.</span> <span class="nav-text">解决:</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Bug2[#18148]"><span class="nav-number">3.0.2.</span> <span class="nav-text">Bug2[#18148]</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#描述:-1"><span class="nav-number">3.0.2.0.0.1.</span> <span class="nav-text">描述:</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#解决:-1"><span class="nav-number">3.0.2.0.0.2.</span> <span class="nav-text">解决:</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#时间周期"><span class="nav-number">4.</span> <span class="nav-text">时间周期</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#计划完成时间：3月31日———-5月20日"><span class="nav-number">4.0.0.1.</span> <span class="nav-text">计划完成时间：3月31日———-5月20日</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#体验时间： _ _ _ 5月21日———-5月27日"><span class="nav-number">4.0.0.2.</span> <span class="nav-text">体验时间：       5月21日———-5月27日</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#第一次顺延：_ _5月27日———6月06日(原因：产品体验 + 修改)"><span class="nav-number">4.0.0.3.</span> <span class="nav-text">第一次顺延：    5月27日———6月06日(原因：产品体验 + 修改)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#第二次顺延：_ _6月06日———6月14日(原因：产品需求变更)"><span class="nav-number">4.0.0.4.</span> <span class="nav-text">第二次顺延：    6月06日———6月14日(原因：产品需求变更)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#第三次顺延：_ _6月16日———6月21日(原因：产品体验 + 修改)"><span class="nav-number">4.0.0.5.</span> <span class="nav-text">第三次顺延：    6月16日———6月21日(原因：产品体验 + 修改)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#测试：              6月22日———7月05日"><span class="nav-number">4.0.0.6.</span> <span class="nav-text">测试：              6月22日———7月05日</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#上线：              7月07日上午10:30分"><span class="nav-number">4.0.0.7.</span> <span class="nav-text">上线：              7月07日上午10:30分</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#总结"><span class="nav-number">5.</span> <span class="nav-text">总结</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator"></div>
@@ -269,7 +342,7 @@
         <div class="copyright">
   
   &copy; &nbsp; 
-  2015
+  2016
   <span class="with-love">
     <i class="icon-heart"></i>
   </span>
